@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -8,11 +9,15 @@ import { personModule } from './person/person.module';
 
 @Module({
   imports: [
-    ApplicationModule,
     personModule,
     EventModule,
+    ConfigModule.forRoot(),
     MongooseModule.forRoot(
-      'mongodb+srv://mednoun:55162859$MoNgOdBaCcEsS@students.ole6z.mongodb.net/Nest_js_API?retryWrites=true&w=majority',
+      'mongodb+srv://' +
+        process.env.DATABASE_USER +
+        ':' +
+        process.env.DATABASE_PASSWORD +
+        '@students.ole6z.mongodb.net/Nest_js_API?retryWrites=true&w=majority',
     ),
   ], //import modules
   controllers: [AppController], //handle requests

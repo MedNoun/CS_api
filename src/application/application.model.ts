@@ -16,3 +16,14 @@ interface Application extends mongoose.Document {
   prevExp: String;
   other: String;
 }
+/*
+positions: 
+Project manager
+Program manager
+Contacts manager
+Sponsoring manager
+Logistics manager
+Organisation manager
+Media manager
+General Secretary
+*/
