@@ -11,6 +11,7 @@ import { personModule } from './person/person.module';
   imports: [
     personModule,
     EventModule,
+    ApplicationModule,
     ConfigModule.forRoot(),
     MongooseModule.forRoot(
       'mongodb+srv://' +

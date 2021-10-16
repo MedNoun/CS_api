@@ -1,8 +1,10 @@
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { NotFoundError } from 'rxjs';
 import { Event } from './event.model';
 
+@Injectable()
 export class EventService {
   constructor(
     @InjectModel('Event') private readonly eventModel: Model<Event>,
@@ -26,10 +28,16 @@ export class EventService {
   }
   async getEventByName(name: string) {
     try {
+      let e = 'Success';
       const event = (await this.eventModel.findOne({ name: name })) as Event;
-      return { event };
+      return { status: e, event };
     } catch (e) {
-      return { e };
+      const empty = (await new this.eventModel({
+        name: 'nan',
+        deadLine: new Date(),
+        date: new Date(),
+      })) as Event;
+      return { status: e, event: empty };
     }
   }
   async deleteEvent(id: string) {

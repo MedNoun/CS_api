@@ -10,5 +10,6 @@ import { PersonSchema } from './person.model';
   ],
   controllers: [PersonController],
   providers: [PersonService],
+  exports: [PersonService],
 })
 export class personModule {}

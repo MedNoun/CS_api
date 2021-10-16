@@ -8,7 +8,7 @@ export const ApplicationSchema = new mongoose.Schema({
   other: { type: String },
 });
 
-interface Application extends mongoose.Document {
+export interface Application extends mongoose.Document {
   candidat: String;
   event: String;
   position: String;
