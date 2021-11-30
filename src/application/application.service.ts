@@ -29,6 +29,7 @@ export class ApplicationService {
           skills: skills,
           prevExp: prevExp,
           other: other,
+          expireAt: event.date,
         });
         new_application.save();
         return new_application;
@@ -37,6 +38,25 @@ export class ApplicationService {
       }
     } catch (e) {
       return { status: 'failed to add your new application! ', error: e };
+    }
+  }
+  async deleteApplicationByEvent(event_name: string) {
+    try {
+      const { status, event } = await this.eventService.getEventByName(
+        event_name,
+      );
+      if (status == 'Success') {
+        const event_id = event.id;
+        const rslt = await this.applicationModel.find({ event: event_id });
+        return rslt;
+      } else {
+        throw status;
+      }
+    } catch (e) {
+      return {
+        status: 'could not delete applications of event : ' + event_name,
+        error: e,
+      };
     }
   }
 }

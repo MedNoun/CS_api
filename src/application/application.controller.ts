@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Param, Post } from '@nestjs/common';
 import { ApplicationService } from './application.service';
 
 @Controller('application')
@@ -20,6 +20,13 @@ export class ApplicationController {
       skills,
       prevExp,
       other,
+    );
+    return rslt;
+  }
+  @Delete('delete/:event_name')
+  async deleteApplicaionsByEvent(@Param('event_name') event_name: string) {
+    const rslt = await this.applicationService.deleteApplicationByEvent(
+      event_name,
     );
     return rslt;
   }
